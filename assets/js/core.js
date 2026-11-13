@@ -49,8 +49,14 @@
         if (data && data.version === VERSION) {
           const before = JSON.stringify(data);
           const normalized = normalize(data);
-          normalized.users.forEach(function (u) { if (u.real_name === '沈知秋') u.real_name = '同学'; });
-          normalized.videos.forEach(function (v) { if (v.uploader_name === '沈知秋') v.uploader_name = '同学'; });
+          normalized.users.forEach(function (u) { if (u.id === 1 && u.real_name === '同学') u.real_name = '沈知秋'; });
+          normalized.videos.forEach(function (v) {
+            if (v.uploader_id === 1 && v.uploader_name === '同学') v.uploader_name = '沈知秋';
+            if (v.video_path && v.video_path.indexOf('?') < 0) v.video_path += '?v=20261113';
+            if (v.cover_image) {
+              v.cover_image = v.cover_image.replace(/\?v=[^&]*$/, '') + '?v=20261115';
+            }
+          });
           if (JSON.stringify(normalized) !== before) localStorage.setItem(DATA_KEY, JSON.stringify(normalized));
           return normalized;
         }

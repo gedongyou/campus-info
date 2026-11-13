@@ -228,14 +228,14 @@
     const videos = C.state.videos.filter(function (v) { return v.status === 'approved'; })
       .sort(function (a, b) { return C.parseDate(b.reviewed_at) - C.parseDate(a.reviewed_at); }).slice(0, 3);
     const headTitle = student ? C.departmentName(student.department) : '全校信息';
-    const headSub = student ? (student.real_name + ' · ' + (student.title || '学生')) : '登录后接收你所在系部的通知';
+    const headSub = student ? (student.title || '学生') : '登录后接收你所在系部的通知';
     if (!homeDept) homeDept = student && student.department ? student.department : 'all';
 
     const urgentHtml = urgent ? '<a class="urgent-card" href="' + noticeHref(urgent.id, 'home') + '"><span class="urgent-icon">' + icon('alert') + '</span>'
       + '<span class="urgent-copy"><span class="urgent-meta"><strong>' + (urgent.priority === 'urgent' ? '紧急通知' : '重要通知') + '</strong>' + escapeHtml(C.scopeText(urgent)) + '</span>'
       + '<h3>' + escapeHtml(urgent.title) + '</h3><p>' + escapeHtml(urgent.summary) + '</p></span><span class="urgent-arrow">' + icon('arrow') + '</span></a>' : '';
 
-    const content = '<div class="home-head"><div><h1>你好，同学</h1>'
+    const content = '<div class="home-head"><div><h1>你好，' + (student ? escapeHtml(student.real_name) : '同学') + '</h1>'
       + '<p>' + escapeHtml(headTitle) + ' · ' + escapeHtml(headSub) + '</p></div>'
       + (student ? '<span class="dept-pill">' + escapeHtml(C.departmentName(student.department).replace('系', '')) + '</span>' : '<a class="dept-pill" href="#/login">登录</a>') + '</div>'
       + urgentHtml
@@ -394,8 +394,8 @@
     C.save();
     const isLocal = !!video.video_key;
     const media = isLocal
-      ? '<video controls playsinline preload="metadata" data-video-key="' + escapeHtml(video.video_key) + '"' + (video.cover_key ? ' data-poster-key="' + escapeHtml(video.cover_key) + '"' : '') + '></video>'
-      : '<video controls playsinline preload="metadata" poster="' + escapeHtml(video.cover_image || '') + '"><source src="' + escapeHtml(video.video_path) + '" type="video/mp4">你的浏览器不支持视频播放。</video>';
+      ? '<video controls autoplay playsinline preload="metadata" data-video-key="' + escapeHtml(video.video_key) + '"' + (video.cover_key ? ' data-poster-key="' + escapeHtml(video.cover_key) + '"' : '') + '></video>'
+      : '<video controls autoplay playsinline preload="metadata" poster="' + escapeHtml(video.cover_image || '') + '"><source src="' + escapeHtml(video.video_path) + '" type="video/mp4">你的浏览器不支持视频播放。</video>';
     const content = '<div class="play-page-player">' + media + '</div><div class="play-page-info"><h1>' + escapeHtml(video.title) + '</h1>'
       + '<div class="detail-meta"><span>' + icon('user') + escapeHtml(video.uploader_name) + '</span><span>' + icon('eye') + Number(video.views) + ' 次播放</span><span>' + icon('clock') + C.formatDate(video.reviewed_at) + ' 发布</span></div>'
       + '<div class="play-description">' + escapeHtml(video.description) + '</div><div class="review-stamp">' + icon('check') + '已通过教师审核</div>'
@@ -404,7 +404,7 @@
     if (isLocal) {
       C.mediaUrl(video.video_key).then(function (url) {
         const player = document.querySelector('.play-page-player video');
-        if (player && url) { player.src = url; player.load(); }
+        if (player && url) { player.src = url; player.load(); player.play().catch(function () {}); }
       });
       if (video.cover_key) {
         C.mediaUrl(video.cover_key).then(function (url) {

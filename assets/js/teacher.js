@@ -432,13 +432,15 @@
     if (!video) return;
     const isLocal = !!video.video_key;
     const media = isLocal
-      ? '<video controls playsinline data-preview-key="' + escapeHtml(video.video_key) + '"' + (video.cover_key ? ' data-preview-poster="' + escapeHtml(video.cover_key) + '"' : '') + '></video>'
-      : '<video controls playsinline poster="' + escapeHtml(video.cover_image || '') + '"><source src="' + escapeHtml(video.video_path) + '" type="video/mp4"></video>';
+      ? '<video controls autoplay playsinline data-preview-key="' + escapeHtml(video.video_key) + '"' + (video.cover_key ? ' data-preview-poster="' + escapeHtml(video.cover_key) + '"' : '') + '></video>'
+      : '<video controls autoplay playsinline poster="' + escapeHtml(video.cover_image || '') + '"><source src="' + escapeHtml(video.video_path) + '" type="video/mp4"></video>';
     const dialog = openDialog(video.title, media + '<p style="margin-top:10px">' + escapeHtml(video.description) + '</p><p>' + escapeHtml(video.uploader_name) + ' · ' + escapeHtml(video.category) + '</p>', '', 'dialog-video');
+    const player = dialog.querySelector('video');
+    if (player) player.play().catch(function () {});
     if (isLocal) {
       C.mediaUrl(video.video_key).then(function (url) {
         const player = dialog.querySelector('video');
-        if (player && url) { player.src = url; player.load(); }
+        if (player && url) { player.src = url; player.load(); player.play().catch(function () {}); }
       });
       if (video.cover_key) {
         C.mediaUrl(video.cover_key).then(function (url) {
