@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#edcf9f" stop-opacity="0"/>
+      <stop offset=".18" stop-color="#edcf9f" stop-opacity=".65"/>
+      <stop offset=".82" stop-color="#edcf9f" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#edcf9f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#edcf9f" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#edcf9f" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#fade)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M80 262H1720"/>
+    <path d="M80 238H1720"/>
+    <path d="M80 238v44M160 238v44M240 238v44M320 238v44M400 238v44M480 238v44M560 238v44M640 238v44M720 238v44M800 238v44M880 238v44M960 238v44M1040 238v44M1120 238v44M1200 238v44M1280 238v44M1360 238v44M1440 238v44M1520 238v44M1600 238v44M1680 238v44" opacity=".55"/>
+    
+    <path d="M210 450c0-142 115-257 257-257s257 115 257 257" stroke-width="9" opacity=".7"/>
+    <path d="M1040 450c0-142 115-257 257-257s257 115 257 257" stroke-width="9" opacity=".7"/>
+    <path d="M560 450c0-188 152-340 340-340s340 152 340 340" stroke-width="11" opacity=".8"/>
+    <path d="M185 450h1430" stroke-width="4" opacity=".7"/>
+    
+    <path d="M270 450c0-110 88-198 197-198s197 88 197 198" opacity=".38"/>
+    <path d="M618 450c0-156 126-282 282-282s282 126 282 282" opacity=".38"/>
+    <path d="M1100 450c0-110 88-198 197-198s197 88 197 198" opacity=".38"/>
+    
+    <path d="M465 450v37M1125 450v37M875 450v55" stroke-width="7" opacity=".55"/>
+    <g opacity=".26">
+      <path d="M270 488c0-70 88-128 197-128s197 58 197 128"/>
+      <path d="M618 488c0-100 126-182 282-182s282 82 282 182"/>
+      <path d="M1100 488c0-70 88-128 197-128s197 58 197 128"/>
+    </g>
+    
+    <g opacity=".3">
+      <path d="M80 190c48-42 96-42 144 0M1160 184c38-44 76-44 114 0M1360 178c46-52 92-52 138 0"/>
+      <path d="M60 198h1700" stroke-width="1.4"/>
+      <path d="M330 188c22-58 62-58 84 0M1470 184c18-48 54-48 72 0"/>
+    </g>
+  </g>
+  <g fill="none" stroke="url(#water)" stroke-width="1.5">
+    <path d="M160 510c150-25 300-25 450 0s300 25 450 0 300-25 450 0 200 18 260 4"/>
+    <path d="M220 532c140-20 280-20 420 0s280 20 420 0 280-20 420 0 160 12 210 2" opacity=".75"/>
+    <path d="M320 550c120-14 240-14 360 0s240 14 360 0 240-14 360 0" opacity=".5"/>
+  </g>
+</svg>
